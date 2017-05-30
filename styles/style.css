@@ -1,0 +1,17 @@
+
+img {
+	margin: auto;
+	display: block;
+}
+
+button {
+	text-align: center;
+}
+
+#center-content {
+	text-align: center;
+}
+
+ul {
+	list-style: none;
+}
