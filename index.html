@@ -6,24 +6,29 @@
 </head>
 <body>
 <div id="center-content">
-<span>Stats</span>
+<span><b>Stats</b></span>
 <br />
 <span>Hunger: </span><span id="HungerMeter"></span>
 <span>Hit Points: </span><span id="hitPointsMeter"></span>
-<span>Battles Won: </span><span id="battlesMeter"></span>
+<span>Tired: </span><span id="tiredMeter"></span>
 
-	<img src="imgs/200px-Agumon2.png"/>
+<span>Battles Won: </span><span id="battlesMeter"></span>
+	<div class="container">
+		<div class="background-image">
+			<img class="alive" id="pet-image" src="imgs/agumonsavers.gif-c200"/>
+		</div>
+
 	<form>
 		<input type="text" placeholder="name" id="petName"></input>
 		<button type="button" id="Name-Box">Submit</input>
 	</form>
 	<button id="greeting">Greeting</button>
 	<button id="feedButton">Feed</button>
+	<button id="sleepButton">Sleep</button>
 	<button id="battleButton">Battle</button>
 	<ul id="activityFeed">
-		<li></li>
+		<li id="default-message"></li>
 	</ul>
-
 	
 <script src="scripts/script.js"></script>
 </div>
