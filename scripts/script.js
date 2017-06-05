@@ -3,6 +3,7 @@ var hungerMeter = document.getElementById("HungerMeter");
 var battlesMeter = document.getElementById("battlesMeter");
 var tiredMeter = document.getElementById("tiredMeter");
 
+var petName = document.getElementById("pet-name");
 var petImage = document.getElementsByTagName("img")[0];
 var body = document.getElementsByTagName("body")[0];
 var lightsOff = function () {
@@ -41,6 +42,7 @@ hungerMeter.innerText = agumon.hunger
 hitPointsMeter.innerText = agumon.hitPoints;
 battlesMeter.innerText = agumon.battlesWon;
 tiredMeter.innerText = agumon.tired;
+petName.innerText = agumon.name;
 
 greetingButton.addEventListener("click", function(){
 	agumon.greeting();
@@ -52,6 +54,7 @@ nameButton.addEventListener("click", function(){
 	var name = document.getElementById("petName").value;
 	agumon.name = name;
 	console.log(agumon.name);
+	petName.innerText = agumon.name;
 });
 
 //This function creates a new item in the activity log
@@ -90,9 +93,9 @@ sleepButton.addEventListener("click", function() {
 		sleepButton.innerText = "Sleep";
 		body.removeAttribute("class");
 		nightTime = false;
-	} else {
+	} else if (nightTime === true) {
 		sleepButton.innerText = "Sleep";
-		nightTime === false;
+		nightTime = false;
 		body.removeAttribute("class");
 	}
 });
@@ -136,7 +139,6 @@ battleButton.addEventListener("click", function() {
 		};
 		hitPointsMeter.innerText = agumon.hitPoints;
 		battlesMeter.innerText = agumon.battlesWon;
-		healing();
 		gameOver();
 		if (agumon.type === "agumon" && agumon.battlesWon >= 4) {
 			petImage.src = "imgs/geogreymon.gif-c200";
@@ -174,7 +176,7 @@ function startTime()
 
 
 //This timer causes tired to slowly tick down
-var tiredTimer = setInterval(function(){tiredTime()},5000);
+var tiredTimer = setInterval(function(){tiredTime()},20000);
 function tiredTime()
 {
   if(agumon.tired <= 0) {
@@ -184,7 +186,7 @@ function tiredTime()
   } else if (nightTime === true && agumon.tired < 10) {
   	if (agumon.tired + 4 > 10) {
   	agumon.tired++
-  	} else {
+  	} else if (nightTime === true) {
   	agumon.tired = agumon.tired += 4;
   	}
   	tiredMeter.innerText = agumon.tired;
@@ -203,15 +205,19 @@ function tiredTime()
 //This timer lets your pet slowly heal up
 
 var healing = function () {
-	var healTimer=setInterval(function(){healTime()},15000);
+	var healTimer=setInterval(function(){healTime()},10000);
 
 	function healTime()
 	{
-	  if(agumon.hitPoints == 10) {
-	    clearInterval(healTimer);
+	  if(agumon.hitPoints >= 10) {
+	    agumon.hitPoints = 10;
+
 	  } else {
 	    agumon.hitPoints++;
+	    console.log("healing ran")
 	    hitPointsMeter.innerText = agumon.hitPoints;
 	  }
 	};
 };
+
+healing();
